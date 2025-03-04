@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud Note-Taking App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        #noteList {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cloud Note-Taking App</h1>
+        <div id="noteList"></div>
+        <form id="noteForm">
+            <textarea id="noteInput" placeholder="Enter your note"></textarea>
+            <button type="submit">Add Note</button>
+        </form>
+    </div>
+    <script>
+        let notes = [
+            "This is my first note",
+            "Remember to buy groceries",
+            "Finish coding project by Friday"
+        ];
+
+        function displayNotes() {
+            const noteList = document.getElementById("noteList");
+            noteList.innerHTML = "";
+            notes.forEach(function(note) {
+                const noteItem = document.createElement("div");
+                noteItem.classList.add("note");
+                noteItem.textContent = note;
+                noteList.appendChild(noteItem);
+            });
+        }
+
+        document.getElementById("noteForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const noteInput = document.getElementById("noteInput");
+            const newNote = noteInput.value.trim();
+            if (newNote !== "") {
+                notes.push(newNote);
+                noteInput.value = "";
+                displayNotes();
+            }
+        });
+        displayNotes();
+    </script>
+</body>
+</html>
